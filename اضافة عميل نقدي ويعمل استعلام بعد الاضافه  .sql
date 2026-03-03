@@ -26,14 +26,7 @@ BEGIN
         Ext2,
         Ext3,
         Transfer,
-        Up_Date,
-        CustEN,
-        CustMOMNo,
-        CustAddEN,
-        Ident_Type,
-        Ident_No,
-        Ctry_Code,
-        Ctry_Name
+        Up_Date
     )
     VALUES (
         N'عميل نقدي',   -- Cust_Name
@@ -57,14 +50,7 @@ BEGIN
         NULL,           -- Ext2
         NULL,           -- Ext3
         1,              -- Transfer
-        0,              -- Up_Date (bit)
-        NULL,           -- CustEN
-        NULL,           -- CustMOMNo
-        NULL,           -- CustAddEN
-        NULL,           -- Ident_Type
-        NULL,           -- Ident_No
-        NULL,           -- Ctry_Code
-        NULL            -- Ctry_Name
+        0              -- Up_Date (bit)
     );
 END
 
