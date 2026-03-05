@@ -1,23 +1,18 @@
 /*---------    والمجموعات الفرعيه Style_Code الاستعلام عن اسم المنتج عربي وانجليزي والسعر وال ---------------------*/
-/*
 WITH Items_CTE AS (
     SELECT
-        -- اسم الصنف عربي
+        p.ID AS ItemID,
         LTRIM(RTRIM(p.ItemName)) AS ItemName_AR,
-
-        -- اسم الصنف إنجليزي
         LTRIM(RTRIM(ISNULL(i.itname_en, p.ItemName))) AS ItemName_EN,
-
-        -- اسم المجموعة الفرعية
         LTRIM(RTRIM(sm.smname)) AS SubCategory,
-
         pr.itprice AS Price,
         p.Style_Code,
 
         ROW_NUMBER() OVER (
-            PARTITION BY LTRIM(RTRIM(ISNULL(i.itname_en, p.ItemName)))
-            ORDER BY p.ID
+            PARTITION BY p.ID
+            ORDER BY pr.itprice DESC
         ) AS rn
+
     FROM TblProductItem p
     INNER JOIN prices_items pr
         ON p.ID = pr.itid
@@ -35,6 +30,7 @@ WITH Items_CTE AS (
 )
 
 SELECT
+    ItemID,
     ItemName_AR,
     ItemName_EN,
     SubCategory,
@@ -42,4 +38,4 @@ SELECT
     Style_Code
 FROM Items_CTE
 WHERE rn = 1
-ORDER BY SubCategory, ItemName_AR;
+ORDER BY ItemID ASC;
